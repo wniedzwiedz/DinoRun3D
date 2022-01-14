@@ -32,5 +32,28 @@
   
                 
 <Background DEF='BackgroundNew' leftUrl="skies/foggy_sky_left.png" rightUrl="skies/foggy_sky_right.png" frontUrl="skies/foggy_sky_front.png" backUrl="skies/foggy_sky_back.png" topUrl="skies/foggy_sky_top.png" bottomUrl="skies/foggy_sky_bottom.png"/>
+    
+    <Group DEF='SPHERE_TREE'>
+<Transform translation='-30 0 -3'>
+<Shape>
+<Appearance>
+<Material USE='BROWN'/>
+<ImageTexture USE='wood'/>
+</Appearance>
+<Cylinder bottom='false' height='6' radius='0.5' top='false'/>
+</Shape>
+</Transform>
+<Transform translation='-30 6 -3'>
+<Shape>
+<Appearance>
+<Material diffuseColor='0 .3 0'/>
+<ImageTexture
+  url=' "leaves.jpg" "https://www.web3d.org/x3d/content/examples/Basic/StudentProjects/leaves.jpg" '/>
+</Appearance>
+<Sphere radius='3.5'/>
+</Shape>
+</Transform>
+</Group>
+    
     </Scene>
 </X3D>
