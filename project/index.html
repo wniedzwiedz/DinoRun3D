@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Dino Run 3D</title>
+        <meta name="created"     content="14 January 2022"/>
+        <meta charset="utf-8"/>
+        <script src="libs/x3dom.js" type="text/javascript" defer></script>
+        <link href="libs/x3dom.css" rel="stylesheet" type="text/css"/>
+
+    </head>
+
+    <body>
+        <h1>Dino Run 3D</h1>
+        <x3d width='720px' height='480px'>
+        <scene>
+	        <inline url="scene.x3d"> </inline> 
+          <transform scale='30 0.1 4' translation='0 -2 0'>
+          <shape> 
+              <appearance> 
+              <material diffuseColor='0 1 0'></material> 
+              </appearance> 
+              <box></box> 
+          </shape> 
+          </transform>
+          <transform translation='-3 0 0'> 
+          <shape> 
+              <appearance> 
+              <material diffuseColor='0 1 0'></material> 
+              </appearance> 
+              <cone></cone> 
+          </shape> 
+          </transform> 
+          <transform translation='3 0 0'> 
+          <shape> 
+              <appearance> 
+              <material diffuseColor='0 0 1'></material> 
+              </appearance> 
+              <sphere></sphere> 
+          </shape> 
+          </transform> 
+        </scene>
+        </x3d>
+    </body>
+</html>
