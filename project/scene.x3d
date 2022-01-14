@@ -29,27 +29,8 @@
         <!-- Additional authoring resources for language codes: https://tools.ietf.org/html/bcp47 http://www.loc.gov/standards/iso639-2/langhome.html http://www.iana.org/numbers.html#index_L -->
     </head>
     <Scene>
-        <Transform DEF="Lamp_TRANSFORM"
-		           translation="-13.175050 1.249867 3.588748"
-		           scale="1.997715 1.704010 1.451030"
-		           rotation="-0.498085 -0.762016 -0.413815 1.513875"
-		           >
-			<PointLight DEF="LA_Lamp"
-			            ambientIntensity="0.0000"
-			            color="1.0000 1.0000 1.0000"
-			            intensity="0.5714"
-			            radius="30.0000" 
-			            location="0.0000 -0.0000 0.0000"
-			            />
-		</Transform>
+  
                 
-        <NavigationInfo headlight="false"
-		                visibilityLimit="0.0"
-		                type='"EXAMINE", "ANY"'
-		                avatarSize="0.25, 1.75, 0.75"
-		                />
-
-                
-<Background DEF='BackgroundNew' leftUrl='"../skies/foggy_sky_left.png"' rightUrl='"../skies/foggy_sky_right.png"' frontUrl='"../skies/foggy_sky_front.png"' backUrl='"../skies/foggy_sky_back.png"' topUrl='"../skies/foggy_sky_top.png"' bottomUrl='"../skies/foggy_sky_bottom.png"'/>
+<Background DEF='BackgroundNew' leftUrl="sk" rightUrl="skies/foggy_sky_right.png" frontUrl="skies/foggy_sky_front.png" backUrl="skies/foggy_sky_back.png" topUrl="skies/foggy_sky_top.png" bottomUrl="skies/foggy_sky_bottom.png"/>
     </Scene>
 </X3D>
