@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE X3D PUBLIC "ISO//Web3D//DTD X3D 3.3//EN" "http://www.web3d.org/specifications/x3d-3.3.dtd">
-<X3D profile='Immersive' version='3.3' xmlns:xsd='http://www.w3.org/2001/XMLSchema-instance' xsd:noNamespaceSchemaLocation='http://www.web3d.org/specifications/x3d-3.3.xsd'>
+<X3D profile='Immersive' version='3.3'
+    xmlns:xsd='http://www.w3.org/2001/XMLSchema-instance' xsd:noNamespaceSchemaLocation='http://www.web3d.org/specifications/x3d-3.3.xsd'>
     <head>
         <!-- Authors need to replace asterisked values or delete unneeded meta tags as appropriate -->
         <meta content='*enter FileNameWithNoAbbreviations.x3d here*' name='title'/>
@@ -29,31 +30,37 @@
         <!-- Additional authoring resources for language codes: https://tools.ietf.org/html/bcp47 http://www.loc.gov/standards/iso639-2/langhome.html http://www.iana.org/numbers.html#index_L -->
     </head>
     <Scene>
-  
-                
-<Background DEF='BackgroundNew' leftUrl="skies/foggy_sky_left.png" rightUrl="skies/foggy_sky_right.png" frontUrl="skies/foggy_sky_front.png" backUrl="skies/foggy_sky_back.png" topUrl="skies/foggy_sky_top.png" bottomUrl="skies/foggy_sky_bottom.png"/>
-    
-    <Group DEF='SPHERE_TREE'>
-<Transform translation='-30 0 -3'>
-<Shape>
-<Appearance>
-<Material USE='BROWN'/>
-<ImageTexture USE='wood'/>
-</Appearance>
-<Cylinder bottom='false' height='6' radius='0.5' top='false'/>
-</Shape>
-</Transform>
-<Transform translation='-30 6 -3'>
-<Shape>
-<Appearance>
-<Material diffuseColor='0 .3 0'/>
-<ImageTexture
-  url=' "leaves.jpg" "https://www.web3d.org/x3d/content/examples/Basic/StudentProjects/leaves.jpg" '/>
-</Appearance>
-<Sphere radius='3.5'/>
-</Shape>
-</Transform>
-</Group>
-    
+
+
+        <Background DEF='BackgroundNew' leftUrl="skies/foggy_sky_left.png" rightUrl="skies/foggy_sky_right.png" frontUrl="skies/foggy_sky_front.png" backUrl="skies/foggy_sky_back.png" topUrl="skies/foggy_sky_top.png" bottomUrl="skies/foggy_sky_bottom.png"/>
+        <SpotLight id='spot' on ="TRUE" beamWidth='0.9' color='0 1 0' cutOffAngle='0.78' location='0 5 0' radius='22'></SpotLight>
+
+        <Group DEF='SPHERE_TREE'>
+            <Transform translation='-30 0 -3'>
+                <Shape>
+                    <Appearance>
+                        <Material USE='BROWN'/>
+                        <ImageTexture url=' "wood.jpg"'/>
+                    </Appearance>
+                    <Cylinder bottom='false' height='6' radius='0.5' top='false'/>
+                </Shape>
+            </Transform>
+
+            <PositionInterpolator DEF='INTERP' key='0 0.25 0.5 0.75 1' keyValue='0 0 0 3 0 0 0 0 0 -3 0 0 0 0 0'/>
+
+            <Transform DEF='BALL' translation='-30 6 -3'>
+                <Shape>
+                    <Appearance>
+                        <Material diffuseColor='0 .3 0'/>
+                        <ImageTexture url=' "leaves.jpg" "https://www.web3d.org/x3d/content/examples/Basic/StudentProjects/leaves.jpg" '/>
+                    </Appearance>
+                    <Sphere radius='3.5'/>
+                </Shape>
+            </Transform>
+        </Group>
+
+        <TimeSensor DEF='TIME' cycleInterval='10' cycleTime='10' elapsedTime='0' enabled='true' first='true' firstCycle='0.0' fraction_changed='0' isActive='false' isPaused='false' loop='true' pauseTime='0' resumeTime='0' startTime='0' stopTime='0' time='0' ></TimeSensor>
+        <!--   <ROUTE fromNode='TIME' fromField='fraction_changed' toNode='INTERP' toField='set_fraction'/>
+        <ROUTE fromNode='INTERP' fromField='value_changed' toNode='BALL' toField='translation'/> -->
     </Scene>
 </X3D>
