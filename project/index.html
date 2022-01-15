@@ -12,7 +12,7 @@
     <body>
         <h1>Dino Run 3D</h1>
         <x3d width='720px' height='480px'>
-        <scene>
+        <scene id="game">
 	        <inline url="scene.x3d"> </inline> 
             <navigationInfo type='"walk" "game"' id="navType" speed=10.0></navigationInfo>
 
@@ -47,8 +47,11 @@
     </body>
 
     <script>
+
+        //time in minutes
+        var gametime = 1; 
         // Set the date we're counting down to
-        var countDownDate = new Date().getTime()+(2*60*1000);
+        var countDownDate = new Date().getTime()+(gametime*60*1000);
         
         // Update the count down every 1 second
         var x = setInterval(function() {
@@ -69,6 +72,8 @@
           if (distance < 0) {
             clearInterval(x);
             document.getElementById("demo").innerHTML = "EXPIRED";
+            var scene = document.getElementById('game');
+            scene.innerHTML="";
           }
         }, 1000);
         </script>

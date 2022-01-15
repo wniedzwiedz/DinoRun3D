@@ -33,7 +33,6 @@
 
 
         <Background DEF='BackgroundNew' leftUrl="skies/foggy_sky_left.png" rightUrl="skies/foggy_sky_right.png" frontUrl="skies/foggy_sky_front.png" backUrl="skies/foggy_sky_back.png" topUrl="skies/foggy_sky_top.png" bottomUrl="skies/foggy_sky_bottom.png"/>
-        <SpotLight id='spot' on ="TRUE" beamWidth='0.9' color='0 1 0' cutOffAngle='0.78' location='0 5 0' radius='22'></SpotLight>
 
         <Group DEF='SPHERE_TREE'>
             <Transform translation='-30 0 -3'>
