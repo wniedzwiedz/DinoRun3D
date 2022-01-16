@@ -1,0 +1,2 @@
+1. zrobić jakis sensowny tor z modeli
+2. zrobić jakąś możliwość wygrania gry (finish line)
