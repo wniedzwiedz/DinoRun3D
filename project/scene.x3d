@@ -31,35 +31,76 @@
     </head>
     <Scene>
 
-
+        <DirectionalLight DEF='MAINLIGHT' ambientIntensity='1'/>
         <Background DEF='BackgroundNew' leftUrl="skies/foggy_sky_left.png" rightUrl="skies/foggy_sky_right.png" frontUrl="skies/foggy_sky_front.png" backUrl="skies/foggy_sky_back.png" topUrl="skies/foggy_sky_top.png" bottomUrl="skies/foggy_sky_bottom.png"/>
+        <TimeSensor DEF='TIME0' cycleInterval='10'/>
+        <ColorInterpolator DEF='COLOR_INTERP' key='0 0.5 1' keyValue='1 0 0 0 1 0 0 0 1'/>
 
         <Group DEF='SPHERE_TREE'>
             <Transform translation='-30 0 -3'>
                 <Shape>
                     <Appearance>
-                        <Material USE='BROWN'/>
+                        <Material DEF='BROWN'/>
                         <ImageTexture url=' "wood.jpg"'/>
                     </Appearance>
                     <Cylinder bottom='false' height='6' radius='0.5' top='false'/>
                 </Shape>
             </Transform>
 
-            <PositionInterpolator DEF='INTERP' key='0 0.25 0.5 0.75 1' keyValue='0 0 0 3 0 0 0 0 0 -3 0 0 0 0 0'/>
+            <ProximitySensor DEF='PROX' size='2 2 2'/>
+
 
             <Transform DEF='BALL' translation='-30 6 -3'>
                 <Shape>
                     <Appearance>
                         <Material diffuseColor='0 .3 0'/>
-                        <ImageTexture url=' "leaves.jpg" "https://www.web3d.org/x3d/content/examples/Basic/StudentProjects/leaves.jpg" '/>
+                        <ImageTexture url=' "leaves.jpg"'/>
                     </Appearance>
                     <Sphere radius='3.5'/>
                 </Shape>
             </Transform>
         </Group>
 
-        <TimeSensor DEF='TIME' cycleInterval='10' cycleTime='10' elapsedTime='0' enabled='true' first='true' firstCycle='0.0' fraction_changed='0' isActive='false' isPaused='false' loop='true' pauseTime='0' resumeTime='0' startTime='0' stopTime='0' time='0' ></TimeSensor>
+        <Collision DEF='END' bboxSize='2 2 2'>
+            <Transform DEF='ENDLINE'>
+                <Shape>
+                    <Appearance>
+                        <Material DEF='myMaterial' diffuseColor='1 0 0'/>
+                    </Appearance>
+                    <Box size='1 1 1'/>
+                </Shape>
+            </Transform>
+        </Collision>
+
+        <Transform DEF='TREE' translation='-2.0 -2 8.0' scale='2 2 2'>
+            <Shape DEF='HTREE'>
+                <Appearance>
+                    <ImageTexture url=' "tree1.png"'/>
+                </Appearance>
+                <IndexedFaceSet solid='false' coordIndex='0 1 2 3'>
+                    <Coordinate point='-1.51 0 0 1.51 0 0 1.51 3 0 -1.51 3 0'/>
+                </IndexedFaceSet>
+            </Shape>
+            <Transform rotation='0 1 0 1.57'>
+                <Shape USE='HTREE'/>
+            </Transform>
+        </Transform>
+
+
+
+
+        <ROUTE fromNode='END' fromField='collideTime' toNode='TIME0' toField='startTime'/>
+        <ROUTE fromNode='TIME0' fromField='fraction_changed' toNode='COLOR_INTERP' toField='set_fraction'/>
+        <ROUTE fromNode='COLOR_INTERP' fromField='value_changed' toNode='myMaterial' toField='set_diffuseColor'/>
+
+
+
+
+        <TimeSensor DEF='TIME' cycleInterval='10'></TimeSensor>
+
+
         <!--   <ROUTE fromNode='TIME' fromField='fraction_changed' toNode='INTERP' toField='set_fraction'/>
         <ROUTE fromNode='INTERP' fromField='value_changed' toNode='BALL' toField='translation'/> -->
+
     </Scene>
 </X3D>

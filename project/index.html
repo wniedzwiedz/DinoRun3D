@@ -9,6 +9,12 @@
 
     </head>
 
+    <style>
+        p{
+            font-size: 30px;
+        }
+    </style>
+
     <body>
         <h1>Dino Run 3D</h1>
         <x3d width='720px' height='480px'>
@@ -16,7 +22,7 @@
 	        <inline url="scene.x3d"> </inline> 
             <navigationInfo type='"walk" "game"' id="navType" speed=10.0></navigationInfo>
 
-          <transform scale='30 0.1 40' translation='0 -2 0'>
+          <transform scale='50 0.1 80' translation='0 -2 0'>
           <shape> 
               <appearance> 
               <material diffuseColor='0 1 0'></material> 
@@ -40,6 +46,11 @@
               <sphere></sphere> 
           </shape> 
           </transform> 
+
+          
+          
+
+          
           
         </scene>
         </x3d>
@@ -71,7 +82,7 @@
           // If the count down is over, write some text 
           if (distance < 0) {
             clearInterval(x);
-            document.getElementById("demo").innerHTML = "EXPIRED";
+            document.getElementById("demo").innerHTML = "YOU DIED";
             var scene = document.getElementById('game');
             scene.innerHTML="";
           }
