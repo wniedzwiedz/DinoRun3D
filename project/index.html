@@ -5,23 +5,33 @@
         <meta name="created"     content="14 January 2022"/>
         <meta charset="utf-8"/>
         <script src="libs/x3dom.js" type="text/javascript" defer></script>
+        <script src="libs/gl-matrix-min.js" type="text/javascript" defer></script>
         <link href="libs/x3dom.css" rel="stylesheet" type="text/css"/>
+        <script src="camera.js" defer></script>
+<style>
+body
+{
+  width: 100%;
+  height: 100%;
+}
 
+p
+{
+  font-size: 30px;
+}
+
+</style>
     </head>
-
-    <style>
-        p{
-            font-size: 30px;
-        }
-    </style>
 
     <body>
         <h1>Dino Run 3D</h1>
-        <x3d width='720px' height='480px'>
+        <input type="button" onclick="x3dom.toggleFullScreen()" value="Fullscreen"/>
+        <x3d width='980px' height='640px' disableLeftDrag="true" disableKeys="true">
         <scene id="game">
+          <navigationinfo type="NONE" avatarsize="1 2 1" speed="10" headlight="true" typeparams="-0.4,60,0.05,2.8" explorationmode="NONE" walkdamping="2" transitiontime="1" transitiontype="LINEAR "></navigationinfo>
+          <viewpoint ID="camera" DEF="camera" description="camera" orientation="0 1 0 4.71239" position="0 0 0" fieldOfView="1.54803" nearClippingPlane="-1" farClippingPlane="-1" centerOfRotation="0,0,0" zNear="-1" zFar="-1" id="camera" set_bind="true"></viewpoint>
+          <DirectionalLight id="directional" direction='0 -0.6 0.4' on ="TRUE" intensity='0.4' shadowIntensity='0.0'> </DirectionalLight> 
 	        <inline url="scene.x3d"> </inline> 
-            <navigationInfo type='"walk" "game"' id="navType" speed=10.0></navigationInfo>
-
           <transform scale='50 0.1 80' translation='0 -2 0'>
           <shape> 
               <appearance> 
@@ -60,7 +70,7 @@
     <script>
 
         //time in minutes
-        var gametime = 1; 
+        var gametime = 5.0; 
         // Set the date we're counting down to
         var countDownDate = new Date().getTime()+(gametime*60*1000);
         
