@@ -2,6 +2,9 @@ canvas = null
 key = []
 previousTimeStamp = 0
 
+cameraPitch = 0.0
+cameraYaw = 0.0
+
 function lockPointer()
 {
   if (!canvas) return
@@ -14,8 +17,29 @@ function rotateCamera(dx, dy)
   camera = document.getElementById("camera")
   if (!camera) return
 
-  orientation = camera.orientation.split(" ")
-  orientation[3] = Number(orientation[3]) - dx * 0.001
+  cameraPitch += dy * 0.001
+  cameraYaw -= dx * 0.001
+
+  cameraYaw = cameraYaw % (Math.PI * 2.0)
+}
+
+function setCameraOrientation(yaw, pitch)
+{
+  forward = glMatrix.vec3.fromValues(1, 0, 0)
+  glMatrix.vec3.rotateY(forward, forward, glMatrix.vec3.fromValues(0, 0, 0), cameraYaw + Math.PI / 2)
+
+  up = glMatrix.vec3.fromValues(0, 1, 0)
+  glMatrix.vec3.rotateZ(up, up, glMatrix.vec3.fromValues(0, 0, 0), cameraPitch)
+
+  right = glMatrix.vec3.create()
+  glMatrix.vec3.cross(right, forward, up)
+
+  trueUp = glMatrix.vec3.create()
+  glMatrix.vec3.cross(trueUp, right, forward)
+  //orientation = camera.orientation.split(" ")
+  
+  //TODO: use pitch and yaw
+  orientation = [0.0, 1.0, 0.0, cameraYaw]
 
   camera.orientation = orientation.join(" ")
 }

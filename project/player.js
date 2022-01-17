@@ -76,9 +76,8 @@ function getColliders()
 
 function move(speed, angle = 0)
 {
-  orientation = getCameraOrientation()
   forward = glMatrix.vec3.fromValues(1, 0, 0)
-  glMatrix.vec3.rotateY(forward, forward, glMatrix.vec3.fromValues(0, 0, 0), Number(orientation[3]) + Math.PI / 2 + angle)
+  glMatrix.vec3.rotateY(forward, forward, glMatrix.vec3.fromValues(0, 0, 0), cameraYaw + Math.PI / 2 + angle)
 
   vec = glMatrix.vec3.create()
   glMatrix.vec3.multiply(vec, forward, glMatrix.vec3.fromValues(speed, speed, speed))
@@ -146,6 +145,8 @@ function step(timestamp)
   }
 
   updateAsteroid()
+
+  setCameraOrientation(cameraYaw, cameraPitch)
 
   window.requestAnimationFrame(step)
 }
