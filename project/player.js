@@ -133,23 +133,19 @@ function step(timestamp)
   if (previousTimeStamp !== timestamp) 
   {
     if (key[87])
-    {
       move(player.speed)
-    } 
+    
     if (key[83])
-    {
       move(-player.speed)
-    }
 
     if (key[65])
-    {
       move(player.speed, +Math.PI / 2)
-    }
+ 
     if (key[68])
-    {
       move(player.speed, -Math.PI / 2)
-    }
   }
+
+  updateAsteroid()
 
   window.requestAnimationFrame(step)
 }

@@ -48,7 +48,7 @@ input{
     <body>
       <div>
         <h1>Dino Run 3D</h1>
-        <p id="demo"></p>
+        <p id="timer"></p>
         <input type="button" onclick="x3dom.toggleFullScreen()" value="Fullscreen"/>
       </div>
         <x3d width='980px' height='640px' disableLeftDrag="true" disableKeys="true">
@@ -66,46 +66,20 @@ input{
               <box></box> 
           </shape> 
           </transform>
-          <Fog bind='false' color='0.1 0.1 0' description='""' fogType='"LINEAR"' isActive='true' metadata='X3DMetadataObject' visibilityRange='50' ></Fog> 
-          
+
+          <transform id="asteroidTransform" translation='0 0 0' scale='1 1 1'>
+            <transform translation='1 1 3' scale='4 4 3'>
+              <shape>
+                <appearance>
+                <material diffuseColor='1 0.3 0.1'></material>
+                </appearance>
+                <sphere></sphere>
+              </shape>
+            </transform>
+          </transform>
+          <!--<Fog bind='false' color='0.1 0.1 0' description='""' fogType='"LINEAR"' isActive='false' metadata='X3DMetadataObject' visibilityRange='50' ></Fog> /--!>
         </scene>
         </x3d>
         
     </body>
-
-    <script>
-
-        //time in minutes
-        var gametime = 5.0; 
-        // Set the date we're counting down to
-        var countDownDate = new Date().getTime()+(gametime*60*1000);
-        
-        // Update the count down every 1 second
-        var x = setInterval(function() {
-        
-          // Get today's date and time
-          var now = new Date().getTime();
-            
-          // Find the distance between now and the count down date
-          var distance = countDownDate - now;
-                      
-          var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-          var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            
-          // Output the result in an element with id="demo"
-          if (!document.getElementById("demo").innerHTML.includes("YOU")){
-                      document.getElementById("demo").innerHTML = minutes + "m " + seconds + "s ";
-
-          }
-            
-          // If the count down is over, write some text 
-          if (distance < 0) {
-            clearInterval(x);
-            document.getElementById("demo").innerHTML = "YOU DIED";
-            var scene = document.getElementById('game');
-            scene.innerHTML="";
-          }
-        }, 1000);
-        </script>
-
 </html>
