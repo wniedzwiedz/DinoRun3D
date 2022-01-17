@@ -4,21 +4,8 @@
     xmlns:xsd='http://www.w3.org/2001/XMLSchema-instance' xsd:noNamespaceSchemaLocation='http://www.web3d.org/specifications/x3d-3.3.xsd'>
     <Scene>
 
-        <DirectionalLight DEF='MAINLIGHT' ambientIntensity='0.6'/>
+        <DirectionalLight DEF='MAINLIGHT' ambientIntensity='0.6' color="1 0.8 0.5"/>
         <Background DEF='BackgroundNew' leftUrl="skies/foggy_sky_left.png" rightUrl="skies/foggy_sky_right.png" frontUrl="skies/foggy_sky_front.png" backUrl="skies/foggy_sky_back.png" topUrl="skies/foggy_sky_top.png" bottomUrl="skies/foggy_sky_bottom.png"/>
-        <TimeSensor DEF='TIME0' cycleInterval='10'/>
-        <ColorInterpolator DEF='COLOR_INTERP' key='0 0.5 1' keyValue='1 0 0 0 1 0 0 0 1'/>
-
-        <!--  <Collision DEF='END' bboxSize='2 2 2'>
-            <Transform DEF='ENDLINE'>
-                <Shape>
-                    <Appearance>
-                        <Material DEF='myMaterial' diffuseColor='1 0 0'/>
-                    </Appearance>
-                    <Box size='1 1 1'/>
-                </Shape>
-            </Transform>
-        </Collision>-->
 
         <Transform translation="20 -2 20">
             <Shape DEF="TREE1">
@@ -242,22 +229,6 @@
                 </Shape>
             </Transform>
         </Transform>
-
-
-
-        <ROUTE fromNode='END' fromField='collideTime' toNode='TIME0' toField='startTime'/>
-        <ROUTE fromNode='TIME0' fromField='fraction_changed' toNode='COLOR_INTERP' toField='set_fraction'/>
-        <ROUTE fromNode='COLOR_INTERP' fromField='value_changed' toNode='myMaterial' toField='set_diffuseColor'/>
-
-
-
-
-        <TimeSensor DEF='TIME' cycleInterval='10'></TimeSensor>
-
-
-        <!--   <ROUTE fromNode='TIME' fromField='fraction_changed' toNode='INTERP' toField='set_fraction'/>
-        <ROUTE fromNode='INTERP' fromField='value_changed' toNode='BALL' toField='translation'/> -->
-
 
     </Scene>
 </X3D>
