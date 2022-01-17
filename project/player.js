@@ -7,6 +7,19 @@ const player =
 
 BOBBING = 0.2
 
+function getColliders()
+{
+  colliders = []
+  transforms = document.getElementById("Inline-Scene").querySelectorAll("Transform")
+  for (t of transforms)
+  {
+    transArr = t.translation.split(" ")
+    tPos = glMatrix.vec3.fromValues(transArr[0], transArr[1], transArr[2])
+    colliders.push([tPos, null]) // TODO: add mask
+  }
+  return colliders
+}
+
 function move(speed, angle = 0)
 {
   orientation = getCameraOrientation()
@@ -16,9 +29,24 @@ function move(speed, angle = 0)
   vec = glMatrix.vec3.create()
   glMatrix.vec3.multiply(vec, forward, glMatrix.vec3.fromValues(speed, speed, speed))
   glMatrix.vec3.add(vec, player.position, vec)
-  player.position[0] = vec[0]
-  player.position[1] = vec[1]
-  player.position[2] = vec[2]
+
+  let collision = false
+  let colliders = getColliders()
+  for (collider of colliders)
+  {
+    let dst = glMatrix.vec3.distance(vec, collider[0])
+    if (dst < 3.0)
+    {
+      collision = true
+    }
+  }
+
+  if (!collision)
+  {
+    player.position[0] = vec[0]
+    player.position[1] = vec[1]
+    player.position[2] = vec[2]
+  }
   setCameraPosition(player.position[0], BOBBING*Math.sin(vec[0]+vec[2]) + player.position[1], player.position[2])
 }
 
