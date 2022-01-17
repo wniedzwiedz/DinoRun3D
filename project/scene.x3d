@@ -218,7 +218,7 @@
             </Shape>
         </Transform>
 
-<Transform scale="0.01 0.02 0.01" translation="0 -2 0">
+<Transform scale="0.01 0.02 0.01" translation="12 -2 6">
         <Shape DEF="FINISH">
 		<Appearance>
 			<Material diffuseColor="0.1 0.1 0.2"/>
