@@ -21,12 +21,28 @@ p
   font-size: 30px;
 }
 
+div{
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding-left: 10%;
+  padding-right: 10%;
+  height: 65px;
+}
+
+input{
+    width: fit-content;
+    height: fit-content;
+}
+
 </style>
     </head>
 
     <body>
+      <div>
         <h1>Dino Run 3D</h1>
+        <p id="demo"></p>
         <input type="button" onclick="x3dom.toggleFullScreen()" value="Fullscreen"/>
+      </div>
         <x3d width='980px' height='640px' disableLeftDrag="true" disableKeys="true">
         <scene id="game">
           <navigationinfo type="NONE" avatarsize="1 2 1" speed="10" headlight="true" typeparams="-0.4,60,0.05,2.8" explorationmode="NONE" walkdamping="2" transitiontime="1" transitiontype="LINEAR "></navigationinfo>
@@ -45,7 +61,7 @@ p
           
         </scene>
         </x3d>
-        <p id="demo"></p>
+        
     </body>
 
     <script>
