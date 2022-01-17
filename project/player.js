@@ -9,6 +9,9 @@ BOBBING = 0.2
 
 function getShapeSize(name)
 {
+  if (name == null || name === undefined || name == "null")
+    return 0.0
+
   switch (name)
   {
     case "TREE1":
@@ -25,13 +28,23 @@ function getShapeSize(name)
     case "ROCK4":
     case "ROCK5":
       return 2.5
+
+    case "FINISH":
+      return 3.0
  
     case "FALLENTREE1":
     case "FALLENTREE2":
     case "LOG":
     case "STUMP":
       return 0.0
+
+    case null:
+    case undefined:
+    case "":
+    case "null":
+      return 0.0
   }
+  console.warn(`Size for '${name}' not defined`)
 }
 
 function getColliders()
@@ -52,7 +65,7 @@ function getColliders()
       else if (shape.hasAttribute("USE"))
         name = shape.getAttribute("USE")
     }
-    if (name)
+    if (name != null)
     {
       size = getShapeSize(name)
     }
@@ -80,6 +93,11 @@ function move(speed, angle = 0)
     let dst = glMatrix.vec3.distance(vec, collider[0])
     if (dst < collider[1])
     {
+      if (collider[2] == "FINISH")
+      {
+        finishReached(player, collider)
+        break
+      }
       collision = true
     }
     if (dst < minDist)
