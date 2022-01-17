@@ -5,7 +5,7 @@
     <Scene>
 
         <DirectionalLight DEF='MAINLIGHT' ambientIntensity='0.6' color="1 0.8 0.5"/>
-        <Background DEF='BackgroundNew' leftUrl="skies/foggy_sky_left.png" rightUrl="skies/foggy_sky_right.png" frontUrl="skies/foggy_sky_front.png" backUrl="skies/foggy_sky_back.png" topUrl="skies/foggy_sky_top.png" bottomUrl="skies/foggy_sky_bottom.png"/>
+        <Background DEF='BackgroundNew' leftUrl="skies/sunset_left.png" rightUrl="skies/sunset_right.png" frontUrl="skies/sunset_front.png" backUrl="skies/sunset_back.png" topUrl="skies/sunset_top.png" bottomUrl="skies/sunset_bottom.png"/>
 
         <Transform translation="20 -2 20">
             <Shape DEF="TREE1">
