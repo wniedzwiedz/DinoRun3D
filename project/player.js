@@ -5,6 +5,8 @@ const player =
   speed: 0.1
 }
 
+BOBBING = 0.2
+
 function move(speed, angle = 0)
 {
   orientation = getCameraOrientation()
@@ -13,9 +15,11 @@ function move(speed, angle = 0)
 
   vec = glMatrix.vec3.create()
   glMatrix.vec3.multiply(vec, forward, glMatrix.vec3.fromValues(speed, speed, speed))
-  glMatrix.vec3.add(player.position, player.position, vec)
-
-  setCameraPosition(player.position[0], player.position[1], player.position[2])
+  glMatrix.vec3.add(vec, player.position, vec)
+  player.position[0] = vec[0]
+  player.position[1] = vec[1]
+  player.position[2] = vec[2]
+  setCameraPosition(player.position[0], BOBBING*Math.sin(vec[0]+vec[2]) + player.position[1], player.position[2])
 }
 
 function step(timestamp) 
