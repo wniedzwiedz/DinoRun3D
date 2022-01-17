@@ -7,6 +7,33 @@ const player =
 
 BOBBING = 0.2
 
+function getShapeSize(name)
+{
+  switch (name)
+  {
+    case "TREE1":
+    case "TREE2":
+      return 2.5
+    case "TREE3":
+    case "TREE4":
+    case "TREE5":
+      return 3.3
+    case "ROCK1":
+    case "ROCK2":
+    case "ROCK3":
+      return 2.8
+    case "ROCK4":
+    case "ROCK5":
+      return 2.5
+ 
+    case "FALLENTREE1":
+    case "FALLENTREE2":
+    case "LOG":
+    case "STUMP":
+      return 0.0
+  }
+}
+
 function getColliders()
 {
   colliders = []
@@ -15,7 +42,21 @@ function getColliders()
   {
     transArr = t.translation.split(" ")
     tPos = glMatrix.vec3.fromValues(transArr[0], transArr[1], transArr[2])
-    colliders.push([tPos, null]) // TODO: add mask
+    shape = t.querySelector("Shape")
+    size = 0.0
+    name = null
+    if (shape)
+    {
+      if (shape.hasAttribute("DEF"))
+        name = shape.getAttribute("DEF")
+      else if (shape.hasAttribute("USE"))
+        name = shape.getAttribute("USE")
+    }
+    if (name)
+    {
+      size = getShapeSize(name)
+    }
+    colliders.push([tPos, size, name])
   }
   return colliders
 }
@@ -32,13 +73,26 @@ function move(speed, angle = 0)
 
   let collision = false
   let colliders = getColliders()
+  let closest = undefined
+  let minDist = 99999.9
   for (collider of colliders)
   {
     let dst = glMatrix.vec3.distance(vec, collider[0])
-    if (dst < 3.0)
+    if (dst < collider[1])
     {
       collision = true
     }
+    if (dst < minDist)
+    {
+      closest = collider
+      minDist = dst
+    }
+  }
+
+  // for debugging
+  if (closest)
+  {
+    //console.log(closest, minDist)
   }
 
   if (!collision)
