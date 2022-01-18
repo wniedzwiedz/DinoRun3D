@@ -2,7 +2,7 @@ const player =
 {
   velocity: glMatrix.vec3.create(),
   position: glMatrix.vec3.create(),
-  speed: 0.1
+  speed: 0.06
 }
 
 BOBBING = 0.2

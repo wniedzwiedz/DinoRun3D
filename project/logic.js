@@ -7,7 +7,7 @@ function finishReached(player, collider) {
 }
 
 
-var gametime = 0.1;
+var gametime = 0.5;
 var countDownDate = new Date().getTime() + (gametime * 60 * 1000);
 
 var x = setInterval(function () {
