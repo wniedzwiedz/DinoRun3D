@@ -42,6 +42,7 @@ function getShapeSize(name)
     case undefined:
     case "":
     case "null":
+    case "Shape":
       return 0.0
   }
   console.warn(`Size for '${name}' not defined`)
@@ -54,21 +55,35 @@ function getColliders()
   for (t of transforms)
   {
     transArr = t.translation.split(" ")
+    
+    while (t.children[0].tagName == t.tagName)
+    {
+      t = t.children[0]
+      transArr2 = t.translation.split(" ")
+      transArr[0] += transArr2[0]
+      transArr[1] += transArr2[1]
+      transArr[2] += transArr2[2]
+    }
     tPos = glMatrix.vec3.fromValues(transArr[0], transArr[1], transArr[2])
-    shape = t.querySelector("Shape")
+
+    shape = t.querySelector("Group")
     size = 0.0
     name = null
     if (shape)
     {
       if (shape.hasAttribute("DEF"))
-        name = shape.getAttribute("DEF")
+        name = shape.getAttribute("DEF").split("_")[0]
       else if (shape.hasAttribute("USE"))
         name = shape.getAttribute("USE")
     }
+    if (name.split("_")[0] == "Shape")
+      continue
+
     if (name != null)
     {
       size = getShapeSize(name)
     }
+
     colliders.push([tPos, size, name])
   }
   return colliders
@@ -109,7 +124,7 @@ function move(speed, angle = 0)
   // for debugging
   if (closest)
   {
-    //console.log(closest, minDist)
+    console.log(closest, minDist)
   }
 
   if (!collision)
