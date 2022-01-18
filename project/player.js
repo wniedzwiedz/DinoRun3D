@@ -107,6 +107,19 @@ function move(speed, angle = 0)
   let colliders = getColliders()
   let closest = undefined
   let minDist = 99999.9
+
+  if (vecX[0] < -7.5)
+    collisionX = true
+  
+  if (vecX[0] > 7.5)
+    collisionX = true
+
+  if (vecZ[2] < -2.5)
+    collisionZ = true
+  
+  if (vecZ[2] > 72.0)
+    collisionZ = true
+
   for (collider of colliders)
   {
     let dstZ = glMatrix.vec3.distance(vecZ, collider[0])
