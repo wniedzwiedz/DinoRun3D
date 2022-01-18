@@ -94,46 +94,65 @@ function move(speed, angle = 0)
   forward = glMatrix.vec3.fromValues(1, 0, 0)
   glMatrix.vec3.rotateY(forward, forward, glMatrix.vec3.fromValues(0, 0, 0), cameraYaw + Math.PI / 2 + angle)
 
-  vec = glMatrix.vec3.create()
-  glMatrix.vec3.multiply(vec, forward, glMatrix.vec3.fromValues(speed, speed, speed))
-  glMatrix.vec3.add(vec, player.position, vec)
+  vecX = glMatrix.vec3.create()
+  glMatrix.vec3.multiply(vecX, forward, glMatrix.vec3.fromValues(speed, 0, 0))
+  glMatrix.vec3.add(vecX, player.position, vecX)
+  
+  vecZ = glMatrix.vec3.create()
+  glMatrix.vec3.multiply(vecZ, forward, glMatrix.vec3.fromValues(0, 0, speed))
+  glMatrix.vec3.add(vecZ, player.position, vecZ)
 
-  let collision = false
+  let collisionX = false
+  let collisionZ = false
   let colliders = getColliders()
   let closest = undefined
   let minDist = 99999.9
   for (collider of colliders)
   {
-    let dst = glMatrix.vec3.distance(vec, collider[0])
-    if (dst < collider[1])
+    let dstZ = glMatrix.vec3.distance(vecZ, collider[0])
+    if (dstZ < collider[1])
     {
       if (collider[2] == "FINISH")
       {
         finishReached(player, collider)
         break
       }
-      collision = true
+      collisionZ = true
     }
-    if (dst < minDist)
+    let dstX = glMatrix.vec3.distance(vecX, collider[0])
+    if (dstX < collider[1])
+    {
+      if (collider[2] == "FINISH")
+      {
+        finishReached(player, collider)
+        break
+      }
+      collisionX = true
+    }
+    if (dstX < minDist)
     {
       closest = collider
-      minDist = dst
+      minDist = dstX
     }
   }
 
   // for debugging
   if (closest)
   {
-    console.log(closest, minDist)
+    //console.log(closest, minDist)
   }
 
-  if (!collision)
+  if (!collisionX)
   {
-    player.position[0] = vec[0]
-    player.position[1] = vec[1]
-    player.position[2] = vec[2]
+    player.position[0] = vecX[0]
   }
-  setCameraPosition(player.position[0], BOBBING*Math.sin(vec[0]+vec[2]) + player.position[1], player.position[2])
+
+  if (!collisionZ)
+  {
+    player.position[2] = vecZ[2]
+  }
+
+  setCameraPosition(player.position[0], BOBBING*Math.sin(vecX[0]+vecZ[2]) + player.position[1], player.position[2])
 }
 
 function step(timestamp) 
