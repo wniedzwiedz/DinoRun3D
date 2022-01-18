@@ -18,13 +18,13 @@ var x = setInterval(function () {
 
   if (!document.getElementById("timer").innerHTML.includes("YOU")) {
     document.getElementById("timer").innerHTML = minutes + "m " + seconds + "s ";
-  }
+  
   if (distance <= 0) {
     clearInterval(x);
     document.getElementById("timer").innerHTML = "YOU DIED";
     var scene = document.getElementById('game');
     scene.innerHTML = "";
-  }
+  }}
 }, 1000);
 
 function updateAsteroid() {
